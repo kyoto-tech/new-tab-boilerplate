@@ -1,22 +1,50 @@
 <!doctype html>
-<html lang="en">
+<html lang="ja">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>New Tab</title>
-    <style>
-      body {
-        display: grid;
-        min-height: 100vh;
-        margin: 0;
-        place-items: center;
-        background: #f8fafc;
-        color: #0f172a;
-        font-family: system-ui, sans-serif;
-      }
-    </style>
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#111122" />
+    <title>ネオン東京</title>
+    <link rel="stylesheet" href="city.css" />
+    <script src="pixel-art.js" defer></script>
+    <script src="city.js" defer></script>
   </head>
   <body>
-    <h1>Hello, world!</h1>
+    <main class="city">
+      <h1 class="sr-only">ネオン東京</h1>
+      <div class="monitor">
+        <div id="scene-frame" class="scene-frame">
+          <canvas id="city-scene" width="640" height="400" role="img" aria-labelledby="scene-description">
+            東京・渋谷をイメージした、90年代PC-98風のネオン街。東京の時刻と天気を表示します。
+          </canvas>
+          <button class="scene-hit" type="button" data-action="orbit" data-hint="星のクラブ" style="left:12.8%;top:23.5%;width:13.5%;height:13.3%" aria-label="星のクラブの看板を切り替える"></button>
+          <button class="scene-hit" type="button" data-action="dream" data-hint="夢の看板" style="left:58.3%;top:24.7%;width:11.7%;height:11.5%" aria-label="夢の看板を切り替える"></button>
+          <button class="scene-hit" type="button" data-action="radio" data-hint="ルナラジオ" style="left:74.1%;top:18%;width:12.8%;height:15.5%" aria-label="ルナラジオの看板を切り替える"></button>
+          <button class="scene-hit" type="button" data-action="tower" data-hint="時計塔" style="left:45%;top:23%;width:10.8%;height:55%" aria-label="時計塔から光の輪を広げる"></button>
+          <button class="scene-hit" type="button" data-action="vending" data-hint="自動販売機" style="left:91.7%;top:70%;width:4.1%;height:10.5%" aria-label="自動販売機のホログラムを出す"></button>
+          <button class="scene-hit" type="button" data-action="cat" data-hint="屋上の猫" style="left:80%;top:51.2%;width:5.7%;height:9.3%" aria-label="屋上の猫と遊ぶ"></button>
+        </div>
+      </div>
+      <p id="scene-description" class="sr-only">東京・渋谷をイメージしたピクセルアートの街。時計塔は日本時間を示し、建物の前を山手線風の電車が走ります。天気は東京の現在の情報に合わせて変わります。看板、時計塔、自動販売機、屋上の猫は操作できます。</p>
+      <p id="scene-status" class="sr-only" aria-live="polite"></p>
+      <time id="tokyo-clock" class="sr-only"></time>
+      <div class="motion-controls">
+        <span id="weather-status" class="weather-status" role="status" aria-live="polite">東京・渋谷の天気を取得中…</span>
+        <div class="control-actions">
+          <label for="lighting-mode">光</label>
+          <select id="lighting-mode" aria-label="街の照明">
+            <option value="auto">自動</option>
+            <option value="morning">朝</option>
+            <option value="day">昼</option>
+            <option value="dusk">夕方</option>
+            <option value="night">夜</option>
+          </select>
+          <button id="motion-toggle" type="button" aria-pressed="false">動きを止める</button>
+        </div>
+      </div>
+      <p class="source-note"><a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">天気データ: Open-Meteo</a> · <span id="weather-freshness">東京の現在地ではなく、渋谷の天気を表示します</span></p>
+      <noscript><p>街を表示するにはJavaScriptを有効にしてください。</p></noscript>
+    </main>
   </body>
 </html>

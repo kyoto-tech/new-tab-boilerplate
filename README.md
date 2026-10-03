@@ -1,19 +1,36 @@
-# New Tab Boilerplate
+# ネオン東京
 
-A minimal Chrome extension that shows a custom page whenever you open a new tab.
+東京・渋谷をイメージした、90年代PC-98風のChrome新しいタブ拡張機能です。640 × 400ピクセル、各場面16色の小さな街をJavaScriptで描きます。ビルの前には山手線風の電車があり、看板や猫で遊べます。ビルド作業や外部ライブラリは不要です。
 
-## Get started
+## はじめかた
 
-1. Clone this repository and open `chrome://extensions` in Google Chrome.
-2. Turn on **Developer mode** in the top-right corner.
-3. Click **Load unpacked** and select this repository's folder (the one containing `manifest.json`).
-4. Open a new tab to see **Hello, world!**
+1. このリポジトリを取得します。
+2. Chromeで `chrome://extensions` を開き、右上の**デベロッパーモード**をオンにします。
+3. **パッケージ化されていない拡張機能を読み込む**を押し、`manifest.json` が入っている**フォルダー**を選びます。マニフェストのファイル自体は選びません。
+4. 新しいタブを開きます。
 
-Edit `newtab.html` to customize the page. After changing a file, click the extension's **Reload** button on `chrome://extensions`, then open or refresh a new tab.
+この作業環境では、選ぶフォルダーは `/home/pocket/Documents/github/new-tab-boilerplate` です。変更後は `chrome://extensions` で拡張機能を再読み込みし、新しいタブを開き直してください。
 
-## Files
+## 街の見かた
 
-- `manifest.json` declares a Manifest V3 extension and points Chrome's new tab override to `newtab.html`.
-- `newtab.html` contains the page's HTML and CSS.
+- 時計塔は**日本時間（JST）**を示します。照明の**自動**設定は東京の時間帯に合わせて朝・昼・夕方・夜に切り替わります。メニューから各照明を試すこともできます。
+- 看板、時計塔、自動販売機、屋上の猫をクリックすると反応します。**Tab**で選び、**Enter**または**Space**でも操作できます。
+- **動きを止める**で装飾的なアニメーションを一時停止できます。時計と天気の更新は続きます。OSの「動きを減らす」設定にも対応します。
+- 天気は**東京・渋谷の固定地点**（北緯35.6595度、東経139.7005度）の現在の気象データに合わせます。晴れ、くもり、雨、雪で空や粒子が変わります。端末の位置情報は取得しません。
 
-No dependencies or build step are required.
+## 天気データについて
+
+[Open-Meteo](https://open-meteo.com/en/docs)の現在の気温と天気コードを使用します。拡張機能には `https://api.open-meteo.com/*` へのアクセス権が必要です。成功したデータは端末に15分間保存し、タブが見えている間に更新します。通信できない場合は前回の情報を「前回の情報」と明記し、保存データもなければ「取得できません」と表示します。天気予報や位置情報は使用しません。
+
+天気データ提供: [Open-Meteo](https://open-meteo.com/)。気象データはモデルに基づく現在の状況で、街の演出はそのコードをもとにした表現です。
+
+## プレビューと構成
+
+[雨の街](previews/tokyo-rain.png) · [雪の街](previews/tokyo-snow.png) · [制作計画](CITY_PLAN.md) · [PC-98の作画方針](PC98_STYLE.md)
+
+プレビューの天気と気温は表示確認用のサンプルです。実際の新しいタブでは渋谷の気象データを取得します。
+
+- `manifest.json`: Chrome Manifest V3、新しいタブの指定、天気APIへのアクセス権。
+- `newtab.html` / `city.css`: 日本語の画面と操作ボタン、レスポンシブ表示。
+- `pixel-art.js`: 16色のピクセル描画と日本語のビットマップ化。
+- `city.js`: 街、電車、時刻、アニメーション、天気取得とキャッシュ。

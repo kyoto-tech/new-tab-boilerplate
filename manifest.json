@@ -1,8 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "New Tab Boilerplate",
-  "version": "1.0.0",
-  "description": "A simple custom new tab page for Google Chrome.",
+  "name": "ネオン東京",
+  "version": "1.6.0",
+  "description": "東京の時刻と天気に合わせて変わる、PC-98風の小さなネオン街。",
+  "host_permissions": ["https://api.open-meteo.com/*"],
   "chrome_url_overrides": {
     "newtab": "newtab.html"
   }
